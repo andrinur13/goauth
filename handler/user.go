@@ -24,7 +24,7 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 
 	if err != nil {
-		response := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to registered user", nil)
+		response := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to registered user", err.Error())
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -32,7 +32,7 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	data, err := h.userService.RegisterUser(input)
 
 	if err != nil {
-		response := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to registered user", nil)
+		response := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to registered user", err.Error())
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}

@@ -22,7 +22,7 @@ func (h *productHandler) InsertProduct(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 
 	if err != nil {
-		formatter := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to insert product", nil)
+		formatter := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to insert product", err.Error())
 		c.JSON(http.StatusUnprocessableEntity, formatter)
 		return
 	}
@@ -31,7 +31,7 @@ func (h *productHandler) InsertProduct(c *gin.Context) {
 	data, err := h.productService.SaveProduct(input)
 
 	if err != nil {
-		formatter := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to insert product", nil)
+		formatter := helper.APIResponse("failed", http.StatusUnprocessableEntity, "failed to insert product", err.Error())
 		c.JSON(http.StatusUnprocessableEntity, formatter)
 		return
 	}
